@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Amizero Association – Hope, Dignity & Community</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --orange: #E84C0E;
+    --orange-dark: #B83A08;
+    --orange-light: #FF6B35;
+    --gold: #F5A623;
+    --green: #2E7D32;
+    --green-light: #4CAF50;
+    --dark: #111111;
+    --charcoal: #1E1E1E;
+    --white: #FFFFFF;
+    --cream: #FDF8F3;
+    --gray: #888888;
+    --light-gray: #F5F5F5;
+    --border: #E0D8D0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+    background: rgba(17,17,17,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(232,76,14,0.3);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%;
+    height: 70px;
+    transition: background .3s;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none;
+  }
+  .nav-logo-icon {
+    width: 48px; height: 48px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .nav-logo-icon svg {
+    width: 48px; height: 48px;
+    filter: drop-shadow(0 2px 8px rgba(232,76,14,0.55));
+    transition: transform 0.3s ease;
+  }
+  .nav-logo:hover .nav-logo-icon svg { transform: scale(1.08); }
+  .nav-logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; font-weight: 700;
+    color: var(--white); letter-spacing: .5px;
+    line-height: 1.1;
+  }
+  .nav-logo-text span { color: var(--orange); display: block; font-size:.65rem; font-family:'DM Sans',sans-serif; font-weight:400; letter-spacing:2px; text-transform:uppercase;}
+  .nav-links { display: flex; gap: 2px; }
+  .nav-links a {
+    color: rgba(255,255,255,.75);
+    text-decoration: none; font-size:.87rem; font-weight:500;
+    padding: 6px 16px; border-radius: 6px;
+    letter-spacing:.3px; transition: all .2s;
+  }
+  .nav-links a:hover, .nav-links a.active {
+    color: var(--white); background: rgba(232,76,14,.2);
+  }
+  .nav-cta {
+    background: var(--orange); color: var(--white)!important;
+    border-radius: 8px!important; padding: 8px 20px!important;
+    font-weight: 600!important;
+  }
+  .nav-cta:hover { background: var(--orange-dark)!important; }
+  .hamburger { display: none; flex-direction: column; gap:5px; cursor:pointer; }
+  .hamburger span { width:26px;height:2px;background:var(--white);border-radius:2px;transition:.3s; }
+
+  /* ── SECTION BASE ── */
+  section { display: none; min-height: 100vh; padding-top: 70px; }
+  section.active { display: block; }
+
+  /* ══════════════════════════════════════
+     HOME HERO
+  ══════════════════════════════════════ */
+  .hero {
+    position: relative; min-height: 100vh;
+    background: var(--charcoal);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+
+  /* Background image: people/volunteers helping children */
+  .hero-bg {
+    position: absolute; inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1800&q=85');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    animation: slowZoom 20s ease-in-out infinite alternate;
+  }
+  @keyframes slowZoom {
+    from { transform: scale(1); }
+    to   { transform: scale(1.06); }
+  }
+  /* Dark overlay so text is readable */
+  .hero-bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(5,3,0,0.78) 0%, rgba(15,6,0,0.65) 50%, rgba(5,3,0,0.82) 100%);
+  }
+
+  .hero-pattern {
+    position: absolute; inset: 0; opacity:.03; z-index:1;
+    background-image: radial-gradient(circle, #fff 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .hero-accent {
+    position: absolute; right: -100px; top: 50%; z-index:1;
+    transform: translateY(-50%);
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(232,76,14,.12) 0%, transparent 70%);
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    padding: 0 5%;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── ANIMATED AMIZERO ASSOCIATION TITLE (CENTERED, SLIDES IN FROM SIDES) ── */
+  .animated-title-wrap {
+    margin-bottom: 32px;
+    text-align: center;
+    width: 100%;
+  }
+  .animated-main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 8vw, 6.5rem);
+    font-weight: 900;
+    letter-spacing: 10px;
+    line-height: 1.1;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  /* AMIZERO slides in from the LEFT to center */
+  .animated-main-title .word-amizero {
+    display: block;
+    color: var(--white);
+    opacity: 0;
+    transform: translateX(-200px);
+    animation: slideFromLeft 1s cubic-bezier(0.23, 1, 0.32, 1) 0.3s forwards;
+  }
+  /* ASSOCIATION slides in from the RIGHT to center */
+  .animated-main-title .word-association {
+    display: block;
+    color: var(--orange);
+    opacity: 0;
+    transform: translateX(200px);
+    animation: slideFromRight 1s cubic-bezier(0.23, 1, 0.32, 1) 0.6s forwards;
+  }
+  @keyframes slideFromLeft {
+    from { opacity: 0; transform: translateX(-200px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes slideFromRight {
+    from { opacity: 0; transform: translateX(200px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  /* Underline draws in from center after both words land */
+  .title-underline {
+    display: block;
+    height: 4px;
+    width: 0;
+    background: linear-gradient(90deg, var(--orange), var(--gold));
+    border-radius: 2px;
+    margin: 14px auto 0;
+    animation: underlineDraw 0.7s ease 1.4s forwards;
+  }
+  @keyframes underlineDraw {
+    to { width: 340px; }
+  }
+  /* Tagline fades up after title settles */
+  .hero-tagline {
+    font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+    color: rgba(255,255,255,0.72);
+    line-height: 1.8;
+    margin-bottom: 36px;
+    max-width: 580px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUp 0.7s ease 1.6s forwards;
+  }
+  .hero-buttons {
+    display: flex; gap: 14px; flex-wrap: wrap;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 1.85s forwards;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%,100% { opacity:1; transform:scale(1); }
+    50% { opacity:.5; transform:scale(.8); }
+  }
+
+  .btn-primary {
+    background: var(--orange); color: var(--white);
+    padding: 14px 32px; border-radius: 10px;
+    font-weight: 600; font-size:.95rem; cursor:pointer;
+    border: none; text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    transition: all .25s; box-shadow: 0 8px 24px rgba(232,76,14,.4);
+  }
+  .btn-primary:hover { background: var(--orange-dark); transform:translateY(-2px); }
+  .btn-outline {
+    background: transparent; color: var(--white);
+    padding: 14px 32px; border-radius: 10px;
+    font-weight: 600; font-size:.95rem; cursor:pointer;
+    border: 1.5px solid rgba(255,255,255,.25); text-decoration:none;
+    display:inline-flex; align-items:center; gap:8px; transition: all .25s;
+  }
+  .btn-outline:hover { border-color:var(--orange); color:var(--orange); }
+
+  /* Stats bar */
+  .stats-bar {
+    background: var(--white);
+    border-top: 4px solid var(--orange);
+    display: grid; grid-template-columns: repeat(4,1fr);
+    box-shadow: 0 4px 40px rgba(0,0,0,.08);
+  }
+  .stat-item {
+    padding: 36px 20px; text-align: center;
+    border-right: 1px solid var(--border);
+    position: relative;
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.6rem; font-weight: 900;
+    color: var(--orange); line-height: 1;
+  }
+  .stat-label { font-size:.82rem; color:var(--gray); margin-top:6px; font-weight:500; letter-spacing:.5px; }
+
+  /* Mission cards */
+  .section-header { text-align:center; margin-bottom:56px; }
+  .section-tag {
+    display:inline-block; background:rgba(232,76,14,.1);
+    color:var(--orange); font-size:.75rem; font-weight:600;
+    letter-spacing:2px; text-transform:uppercase;
+    padding:5px 16px; border-radius:50px; margin-bottom:14px;
+  }
+  .section-title {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(1.8rem,3.5vw,2.6rem);
+    color:var(--dark); line-height:1.2;
+  }
+  .section-title span { color:var(--orange); }
+  .section-sub { font-size:1rem; color:var(--gray); margin-top:12px; max-width:550px; margin-left:auto; margin-right:auto; line-height:1.7; }
+
+  .content-section { padding: 96px 5%; }
+  .content-section.alt { background: var(--cream); }
+
+  .mission-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .mission-card {
+    background:var(--white); border-radius:16px;
+    padding:36px 28px; border:1px solid var(--border);
+    transition: all .3s; position:relative; overflow:hidden;
+  }
+  .mission-card::before {
+    content:''; position:absolute; top:0; left:0; right:0;
+    height:3px; background:var(--orange);
+    transform:scaleX(0); transition:.3s; transform-origin:left;
+  }
+  .mission-card:hover::before { transform:scaleX(1); }
+  .mission-card:hover { box-shadow:0 20px 60px rgba(0,0,0,.1); transform:translateY(-4px); }
+  .mission-icon {
+    width:56px; height:56px; border-radius:14px;
+    background:rgba(232,76,14,.1); display:flex; align-items:center; justify-content:center;
+    font-size:1.6rem; margin-bottom:20px;
+  }
+  .mission-card h3 { font-family:'Playfair Display',serif; font-size:1.2rem; margin-bottom:12px; }
+  .mission-card p { font-size:.9rem; color:var(--gray); line-height:1.7; }
+
+  /* Image gallery */
+  .gallery-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .gallery-item {
+    border-radius:14px; overflow:hidden; aspect-ratio:4/3;
+    background:var(--light-gray); position:relative;
+    display:flex; align-items:center; justify-content:center;
+    border:2px dashed var(--border);
+    transition:all .3s; cursor:pointer;
+  }
+  .gallery-item:hover { transform:scale(1.02); box-shadow:0 16px 40px rgba(0,0,0,.12); }
+  .gallery-placeholder {
+    text-align:center; color:var(--gray);
+  }
+  .gallery-placeholder .icon { font-size:2.5rem; margin-bottom:10px; }
+  .gallery-placeholder p { font-size:.82rem; }
+  .gallery-item img { width:100%; height:100%; object-fit:cover; position:absolute; inset:0; }
+
+  /* ══════════════════════════════════════
+     ABOUT US
+  ══════════════════════════════════════ */
+  .about-hero {
+    background: linear-gradient(135deg, #111 0%, #1a0800 100%);
+    padding: 100px 5% 80px;
+    text-align: center;
+  }
+  .about-hero h1 {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(2rem,4vw,3.5rem);
+    color:var(--white); margin-bottom:16px;
+  }
+  .about-hero p { color:rgba(255,255,255,.6); max-width:600px; margin:0 auto; line-height:1.8; }
+
+  .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+  .about-image-wrap {
+    position:relative; border-radius:20px; overflow:hidden;
+    aspect-ratio:4/5; background:var(--light-gray);
+    display:flex; align-items:center; justify-content:center;
+    border:2px dashed var(--border);
+  }
+  .about-image-wrap img { width:100%; height:100%; object-fit:cover; }
+  .about-badge-float {
+    position:absolute; bottom:24px; left:24px;
+    background:var(--orange); color:var(--white);
+    padding:14px 20px; border-radius:12px;
+    font-weight:700; font-size:1rem;
+  }
+  .about-text h2 { font-family:'Playfair Display',serif; font-size:2rem; margin-bottom:20px; }
+  .about-text p { color:var(--gray); line-height:1.8; margin-bottom:16px; font-size:.95rem; }
+  .values-list { margin-top:28px; display:flex; flex-direction:column; gap:16px; }
+  .value-item { display:flex; gap:14px; align-items:flex-start; }
+  .value-dot { width:10px; height:10px; border-radius:50%; background:var(--orange); margin-top:6px; flex-shrink:0; }
+  .value-item h4 { font-size:.95rem; font-weight:600; margin-bottom:4px; }
+  .value-item p { font-size:.87rem; color:var(--gray); }
+
+  .team-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+  .team-card {
+    text-align:center; background:var(--white);
+    border-radius:16px; padding:32px 20px;
+    border:1px solid var(--border); transition:.3s;
+  }
+  .team-card:hover { box-shadow:0 16px 48px rgba(0,0,0,.1); transform:translateY(-4px); }
+  .team-avatar {
+    width:80px; height:80px; border-radius:50%;
+    background:linear-gradient(135deg,var(--orange),var(--gold));
+    margin:0 auto 16px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:2rem; color:var(--white); font-family:'Playfair Display',serif; font-weight:900;
+  }
+  .team-card h4 { font-size:1rem; font-weight:600; margin-bottom:4px; }
+  .team-card span { font-size:.83rem; color:var(--orange); }
+
+  /* ══════════════════════════════════════
+     BLOG
+  ══════════════════════════════════════ */
+  .blog-hero {
+    background: linear-gradient(135deg, #111 0%, #0d1a0d 100%);
+    padding: 100px 5% 80px; text-align:center;
+  }
+  .blog-hero h1 { font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3.5rem); color:var(--white); margin-bottom:16px; }
+  .blog-hero p { color:rgba(255,255,255,.6); max-width:600px; margin:0 auto; line-height:1.8; }
+
+  .blog-tabs { display:flex; gap:8px; justify-content:center; margin-bottom:48px; flex-wrap:wrap; }
+  .blog-tab {
+    padding:10px 24px; border-radius:50px; border:1.5px solid var(--border);
+    font-size:.88rem; font-weight:600; cursor:pointer;
+    transition:.2s; background:var(--white); color:var(--dark);
+  }
+  .blog-tab.active { background:var(--orange); border-color:var(--orange); color:var(--white); }
+
+  .blog-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+  .blog-card {
+    background:var(--white); border-radius:16px;
+    border:1px solid var(--border); overflow:hidden; transition:.3s;
+  }
+  .blog-card:hover { box-shadow:0 20px 60px rgba(0,0,0,.1); transform:translateY(-4px); }
+  .blog-img {
+    aspect-ratio:16/9; background:var(--light-gray);
+    display:flex; align-items:center; justify-content:center;
+    font-size:2.5rem; color:var(--gray);
+    position:relative; overflow:hidden;
+  }
+  .blog-cat {
+    position:absolute; top:12px; left:12px;
+    background:var(--orange); color:var(--white);
+    font-size:.72rem; font-weight:700; letter-spacing:1px;
+    padding:4px 12px; border-radius:50px; text-transform:uppercase;
+  }
+  .blog-body { padding:24px; }
+  .blog-meta { font-size:.78rem; color:var(--gray); margin-bottom:10px; }
+  .blog-body h3 { font-family:'Playfair Display',serif; font-size:1.05rem; margin-bottom:10px; line-height:1.4; }
+  .blog-body p { font-size:.87rem; color:var(--gray); line-height:1.7; }
+  .blog-read { display:inline-flex; align-items:center; gap:6px; margin-top:16px; font-size:.85rem; font-weight:600; color:var(--orange); cursor:pointer; }
+
+  /* ══════════════════════════════════════
+     PROGRAMS
+  ══════════════════════════════════════ */
+  .program-hero {
+    background: linear-gradient(135deg, #111 0%, #001a1a 100%);
+    padding: 100px 5% 80px; text-align:center;
+  }
+  .program-hero h1 { font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3.5rem); color:var(--white); margin-bottom:16px; }
+  .program-hero p { color:rgba(255,255,255,.6); max-width:600px; margin:0 auto; line-height:1.8; }
+
+  .programs-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:32px; }
+  .program-card {
+    background:var(--white); border-radius:20px;
+    border:1px solid var(--border); overflow:hidden; transition:.3s;
+  }
+  .program-card:hover { box-shadow:0 24px 64px rgba(0,0,0,.12); transform:translateY(-4px); }
+  .program-img {
+    aspect-ratio:16/9; background:var(--light-gray);
+    display:flex; align-items:center; justify-content:center;
+    border:2px dashed var(--border); position:relative;
+    flex-direction:column; gap:8px; color:var(--gray);
+    font-size:.85rem; text-align:center; padding:20px;
+  }
+  .program-img .big-icon { font-size:3rem; margin-bottom:4px; }
+  .program-img .upload-hint { font-size:.75rem; color:var(--gray); }
+  .program-body { padding:28px; }
+  .program-tag {
+    display:inline-block; background:rgba(232,76,14,.1);
+    color:var(--orange); font-size:.72rem; font-weight:700;
+    letter-spacing:1px; text-transform:uppercase;
+    padding:4px 12px; border-radius:50px; margin-bottom:12px;
+  }
+  .program-body h3 { font-family:'Playfair Display',serif; font-size:1.2rem; margin-bottom:10px; }
+  .program-body p { font-size:.9rem; color:var(--gray); line-height:1.7; }
+  .program-stats { display:flex; gap:20px; margin-top:20px; padding-top:20px; border-top:1px solid var(--border); }
+  .p-stat { text-align:center; }
+  .p-stat strong { font-size:1.3rem; color:var(--orange); font-family:'Playfair Display',serif; }
+  .p-stat span { display:block; font-size:.75rem; color:var(--gray); }
+
+  /* ══════════════════════════════════════
+     CONTACT
+  ══════════════════════════════════════ */
+  .contact-hero {
+    background: linear-gradient(135deg, #111 0%, #0a0a1a 100%);
+    padding: 100px 5% 80px; text-align:center;
+  }
+  .contact-hero h1 { font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3.5rem); color:var(--white); margin-bottom:16px; }
+  .contact-hero p { color:rgba(255,255,255,.6); max-width:600px; margin:0 auto; line-height:1.8; }
+
+  .contact-wrap { display:grid; grid-template-columns:1fr 1.4fr; gap:64px; align-items:start; }
+  .contact-info h2 { font-family:'Playfair Display',serif; font-size:1.8rem; margin-bottom:20px; }
+  .contact-info p { color:var(--gray); line-height:1.8; margin-bottom:28px; }
+  .contact-item {
+    display:flex; align-items:flex-start; gap:16px;
+    padding:20px; background:var(--white); border-radius:14px;
+    border:1px solid var(--border); margin-bottom:16px; transition:.3s;
+  }
+  .contact-item:hover { box-shadow:0 8px 32px rgba(0,0,0,.08); border-color:var(--orange); }
+  .contact-icon {
+    width:48px; height:48px; border-radius:12px;
+    background:rgba(232,76,14,.1); display:flex; align-items:center; justify-content:center;
+    font-size:1.4rem; flex-shrink:0;
+  }
+  .contact-item-text a { color:var(--orange); text-decoration:none; font-weight:600; }
+  .contact-item-text span { display:block; font-size:.8rem; color:var(--gray); margin-bottom:4px; font-weight:500; letter-spacing:.5px; text-transform:uppercase; }
+  .contact-item-text p { font-size:.95rem; color:var(--dark); margin:0; }
+
+  .socials-row { display:flex; gap:12px; margin-top:8px; }
+  .social-btn {
+    display:flex; align-items:center; gap:10px;
+    padding:12px 20px; border-radius:12px;
+    font-size:.88rem; font-weight:600; cursor:pointer;
+    text-decoration:none; transition:.25s; border:none;
+  }
+  .social-instagram { background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color:#fff; }
+  .social-whatsapp { background:#25D366; color:#fff; }
+  .social-btn:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.2); }
+
+  .contact-form-wrap {
+    background:var(--white); border-radius:20px;
+    padding:40px; border:1px solid var(--border);
+    box-shadow:0 8px 48px rgba(0,0,0,.06);
+  }
+  .contact-form-wrap h3 { font-family:'Playfair Display',serif; font-size:1.5rem; margin-bottom:24px; }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .form-group { margin-bottom:20px; }
+  .form-group label { display:block; font-size:.83rem; font-weight:600; margin-bottom:8px; color:var(--charcoal); letter-spacing:.3px; }
+  .form-group input, .form-group textarea, .form-group select {
+    width:100%; padding:12px 16px; border-radius:10px;
+    border:1.5px solid var(--border); font-family:'DM Sans',sans-serif; font-size:.9rem;
+    color:var(--dark); background:var(--white); outline:none; transition:.2s;
+  }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color:var(--orange); box-shadow:0 0 0 3px rgba(232,76,14,.1); }
+  .form-group textarea { resize:vertical; min-height:120px; }
+  .submit-btn {
+    width:100%; padding:14px; background:var(--orange); color:var(--white);
+    border:none; border-radius:10px; font-size:1rem; font-weight:600;
+    cursor:pointer; transition:.25s; font-family:'DM Sans',sans-serif;
+    box-shadow:0 6px 20px rgba(232,76,14,.35);
+  }
+  .submit-btn:hover { background:var(--orange-dark); transform:translateY(-2px); }
+  .form-success { display:none; text-align:center; padding:20px; color:var(--green); font-weight:600; font-size:1rem; }
+
+  /* ══════════════════════════════════════
+     FOOTER
+  ══════════════════════════════════════ */
+  footer {
+    background:var(--dark); color:rgba(255,255,255,.6);
+    padding:64px 5% 32px;
+  }
+  .footer-top { display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:48px; margin-bottom:48px; }
+  .footer-brand h3 { font-family:'Playfair Display',serif; color:var(--white); font-size:1.4rem; margin-bottom:12px; }
+  .footer-brand p { font-size:.88rem; line-height:1.7; }
+  .footer-col h4 { color:var(--white); font-size:.9rem; font-weight:600; margin-bottom:16px; letter-spacing:.5px; }
+  .footer-col a { display:block; font-size:.85rem; color:rgba(255,255,255,.5); text-decoration:none; margin-bottom:10px; transition:.2s; cursor:pointer; }
+  .footer-col a:hover { color:var(--orange); }
+  .footer-bottom { border-top:1px solid rgba(255,255,255,.1); padding-top:24px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+  .footer-bottom p { font-size:.82rem; }
+  .footer-social { display:flex; gap:10px; }
+  .f-soc {
+    width:36px; height:36px; border-radius:8px;
+    background:rgba(255,255,255,.08); display:flex; align-items:center; justify-content:center;
+    font-size:1rem; cursor:pointer; text-decoration:none; color:var(--white); transition:.2s;
+  }
+  .f-soc:hover { background:var(--orange); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width:900px) {
+    .mission-grid, .gallery-grid, .team-grid, .blog-grid, .programs-grid { grid-template-columns:1fr; }
+    .about-grid, .contact-wrap { grid-template-columns:1fr; }
+    .stats-bar { grid-template-columns:repeat(2,1fr); }
+    .footer-top { grid-template-columns:1fr 1fr; gap:32px; }
+    .form-row { grid-template-columns:1fr; }
+    .nav-links { display:none; position:fixed; top:70px; left:0; right:0; background:rgba(17,17,17,.98); flex-direction:column; padding:20px; gap:4px; }
+    .nav-links.open { display:flex; }
+    .hamburger { display:flex; }
+    .animated-main-title { font-size: clamp(2.4rem, 8vw, 4rem); letter-spacing: 2px; }
+  }
+  @media (max-width:500px) {
+    .stats-bar { grid-template-columns:1fr 1fr; }
+    .footer-top { grid-template-columns:1fr; }
+    .animated-main-title { font-size: clamp(2rem, 10vw, 3rem); letter-spacing: 1px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a class="nav-logo" href="#" onclick="showSection('home')">
+    <div class="nav-logo-icon">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Rwanda map silhouette -->
+        <path d="M13 9 C11 10.5 9.5 12.5 9 14.5 C8.5 16.5 8.5 18.5 9.5 20.5 C10 22 9.5 24 10.5 26 C11.5 28 11 30 12 32 C13 34 15 36 17.5 37 C19.5 38 21.5 39 24 39 C26.5 39 28.5 38 30.5 37 C32.5 36 34.5 34 35.5 32 C36.5 30 37 28 37 26 C37.5 24 38 22 37.5 20 C37 18 36 16 34.5 14 C33 12 31 10.5 29 9.5 C27 8.5 25 8 23 8 C20.5 8 18 8 16 8.5 C14.5 8.8 13.8 8.5 13 9 Z"
+          fill="#E84C0E" stroke="#c0390a" stroke-width="0.6"/>
+        <path d="M15 11 C13.5 13 13 15 13.5 17 C14 15 15.5 12.5 18 11.5 Z" fill="rgba(255,255,255,0.15)"/>
+        <!-- Child 1 head -->
+        <circle cx="19.5" cy="18.5" r="2.3" fill="#FFDCC8"/>
+        <!-- Child 1 body -->
+        <line x1="19.5" y1="20.8" x2="19.5" y2="26.5" stroke="#FFDCC8" stroke-width="1.7" stroke-linecap="round"/>
+        <!-- Child 1 arms up -->
+        <path d="M16.8 22.5 C17.8 21.5 19.5 21 19.5 21 C19.5 21 21.2 21.5 22.2 22.5" stroke="#FFDCC8" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+        <!-- Child 1 legs -->
+        <line x1="19.5" y1="26.5" x2="17.8" y2="30.5" stroke="#FFDCC8" stroke-width="1.3" stroke-linecap="round"/>
+        <line x1="19.5" y1="26.5" x2="21.2" y2="30.5" stroke="#FFDCC8" stroke-width="1.3" stroke-linecap="round"/>
+        <!-- Child 2 head -->
+        <circle cx="28.5" cy="18.5" r="2.3" fill="#FFDCC8"/>
+        <!-- Child 2 body -->
+        <line x1="28.5" y1="20.8" x2="28.5" y2="26.5" stroke="#FFDCC8" stroke-width="1.7" stroke-linecap="round"/>
+        <!-- Child 2 arms up -->
+        <path d="M25.8 22.5 C26.8 21.5 28.5 21 28.5 21 C28.5 21 30.2 21.5 31.2 22.5" stroke="#FFDCC8" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+        <!-- Child 2 legs -->
+        <line x1="28.5" y1="26.5" x2="26.8" y2="30.5" stroke="#FFDCC8" stroke-width="1.3" stroke-linecap="round"/>
+        <line x1="28.5" y1="26.5" x2="30.2" y2="30.5" stroke="#FFDCC8" stroke-width="1.3" stroke-linecap="round"/>
+        <!-- Gold heart between children -->
+        <path d="M24 21.5 C24 20.7 24.4 20.3 24.8 20.3 C25.2 20.3 25.5 20.6 25.5 21 C25.5 21.8 24 23 24 23 C24 23 22.5 21.8 22.5 21 C22.5 20.6 22.8 20.3 23.2 20.3 C23.6 20.3 24 20.7 24 21.5 Z" fill="#FFD700"/>
+      </svg>
+    </div>
+    <div>
+      <div class="nav-logo-text">Amizero<span>Association</span></div>
+    </div>
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="#" onclick="showSection('home')" class="active" id="nav-home">HOME</a>
+    <a href="#" onclick="showSection('about')" id="nav-about">ABOUT US</a>
+    <a href="#" onclick="showSection('blog')" id="nav-blog">BLOG</a>
+    <a href="#" onclick="showSection('program')" id="nav-program">PROGRAM</a>
+    <a href="#" onclick="showSection('contact')" class="nav-cta" id="nav-contact">CONTACT US</a>
+  </div>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ══════════════ HOME ══════════════ -->
+<section id="home" class="active">
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-pattern"></div>
+    <div class="hero-accent"></div>
+    <div class="hero-content">
+
+      <!-- ANIMATED TITLE -->
+      <div class="animated-title-wrap">
+        <div class="animated-main-title">
+          <span class="word-amizero">AMIZERO</span>
+          <span class="word-association">ASSOCIATION</span>
+        </div>
+        <span class="title-underline"></span>
+      </div>
+
+      <p class="hero-tagline">Amizero Association is committed to helping vulnerable families by providing essential support and promoting community solidarity. Together, we work to create better living conditions for everyone.</p>
+      <div class="hero-buttons">
+        <button class="btn-primary" onclick="showSection('program')">✨ Our Programs</button>
+        <button class="btn-outline" onclick="showSection('about')">Learn More →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat-item"><div class="stat-number">500+</div><div class="stat-label">Families Helped</div></div>
+    <div class="stat-item"><div class="stat-number">12+</div><div class="stat-label">Active Programs</div></div>
+    <div class="stat-item"><div class="stat-number">8</div><div class="stat-label">Partner Countries</div></div>
+    <div class="stat-item"><div class="stat-number">5+</div><div class="stat-label">Years of Impact</div></div>
+  </div>
+
+  <!-- MISSION SECTION -->
+  <div class="content-section">
+    <div class="section-header">
+      <div class="section-tag">Our Purpose</div>
+      <h2 class="section-title">What Drives <span>Our Mission</span></h2>
+      <p class="section-sub">Three pillars guide everything we do at Amizero Association.</p>
+    </div>
+    <div class="mission-grid">
+      <div class="mission-card">
+        <div class="mission-icon">🏠</div>
+        <h3>Shelter & Essentials</h3>
+        <p>Providing vulnerable families with shelter, food, clothing, and other essential resources they need to live with dignity and stability.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-icon">📚</div>
+        <h3>Education & Skills</h3>
+        <p>Empowering communities through educational programs, vocational training, and literacy support that open doors to brighter futures.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-icon">🤲</div>
+        <h3>Community Solidarity</h3>
+        <p>Building strong bonds of mutual support, fostering unity, and creating networks of care that lift entire neighborhoods.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- GALLERY -->
+  <div class="content-section alt">
+    <div class="section-header">
+      <div class="section-tag">Our Impact</div>
+      <h2 class="section-title">Moments of <span>Change</span></h2>
+      <p class="section-sub">Driven by compassion, united by purpose — our team is the heart of Amizero</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+            <img src="community.jfif" alt="community event">
+          <p>Upload Image 1<br><small>Field work / community event</small></p>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <img src="support.jfif" alt="">
+          <p>Upload Image 2<br><small>Donation / support distribution</small></p>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+            <img src="education program.jfif" alt="education program">
+          <p>Upload Image 3<br><small>Training / education program</small></p>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+            <img src="collaboration.jfif" alt="collaboration">
+          <p>Upload Image 4<br><small>Partner meetings / collaboration</small></p>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <img src="helped.jfif" alt="helped">
+          <p>Upload Image 5<br><small>Beneficiaries / families helped</small></p>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <img src="events.jfif" alt="events">
+          <p>Upload Image 6<br><small>Special events / ceremonies</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA BANNER -->
+  <div style="background:var(--orange);padding:80px 5%;text-align:center;">
+    <h2 style="font-family:'Playfair Display',serif;font-size:2.4rem;color:#fff;margin-bottom:16px;">Ready to Make a Difference?</h2>
+    <p style="color:rgba(255,255,255,.8);max-width:500px;margin:0 auto 32px;line-height:1.8;">Every contribution, big or small, helps us change lives. Join Amizero Association today.</p>
+    <button class="btn-outline" style="border-color:rgba(255,255,255,.6);" onclick="showSection('contact')">Get Involved →</button>
+  </div>
+</section>
+
+<!-- ══════════════ ABOUT US ══════════════ -->
+<section id="about">
+  <div class="about-hero">
+    <div class="section-tag" style="background:rgba(245,166,35,.15);color:var(--gold);">Who We Are</div>
+    <h1>About <span style="color:var(--orange);">Amizero</span> Association</h1>
+    <p>A community-driven organization rooted in compassion, solidarity, and the belief that every person deserves dignity and hope.</p>
+  </div>
+
+  <div class="content-section">
+    <div class="about-grid">
+      <div class="about-image-wrap">
+        <div class="gallery-placeholder" style="text-align:center;color:var(--gray);">
+          <img src="compassion.jfif" alt="compassion">
+        </div>
+        <div class="about-badge-float">Founded with Love ❤️</div>
+      </div>
+      <div class="about-text">
+        <div class="section-tag">Our Story</div>
+        <h2>Born from <span style="color:var(--orange);">Compassion</span></h2>
+        <p>Amizero Association was founded on the simple but powerful belief that no one should face hardship alone. In Kinyarwanda, "Amizero" means <strong>Hope</strong> — and that is exactly what we strive to bring to every family we serve.</p>
+        <p>We are a registered non-governmental organization working across Rwanda and beyond, delivering targeted support programs to the most vulnerable households. Our work spans food security, shelter assistance, education, psychosocial support, and community development.</p>
+        <p>From our humble beginnings as a small volunteer group, we have grown into a recognized force for good — partnering with international organizations, government bodies, and diaspora communities to amplify our impact.</p>
+        <div class="values-list">
+          <div class="value-item">
+            <div class="value-dot"></div>
+            <div><h4>Dignity First</h4><p>Every individual we serve is treated with the utmost respect and humanity.</p></div>
+          </div>
+          <div class="value-item">
+            <div class="value-dot"></div>
+            <div><h4>Transparency & Accountability</h4><p>We maintain open records and share our financial impact reports with all stakeholders.</p></div>
+          </div>
+          <div class="value-item">
+            <div class="value-dot"></div>
+            <div><h4>Community-Led Change</h4><p>Solutions are shaped by the communities themselves — we listen before we act.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VISION / MISSION -->
+  <div class="content-section alt">
+    <div class="section-header">
+      <div class="section-tag">Vision & Mission</div>
+      <h2 class="section-title">What We <span>Stand For</span></h2>
+    </div>
+    <div class="mission-grid">
+      <div class="mission-card">
+        <div class="mission-icon">🌅</div>
+        <h3>Our Vision</h3>
+        <p>A Rwanda — and a world — where every family has access to the basic necessities of life, where poverty is not a destiny, and where community bonds are the foundation of lasting wellbeing.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-icon">🎯</div>
+        <h3>Our Mission</h3>
+        <p>To mobilize resources, build partnerships, and implement programs that deliver meaningful, measurable improvements in the lives of vulnerable families and individuals across Rwanda.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-icon">⚖️</div>
+        <h3>Our Values</h3>
+        <p>Integrity, compassion, inclusivity, solidarity, and sustainability. These are not just words — they are the daily practice of every member and volunteer of Amizero Association.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEAM -->
+  <div class="content-section">
+    <div class="section-header">
+      <div class="section-tag">Leadership</div>
+      <h2 class="section-title">The <span>Team</span> Behind the Mission</h2>
+      <p class="section-sub">Dedicated individuals working tirelessly to serve communities across Rwanda.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card"><div class="team-avatar">A</div><h4>Executive Director</h4><span>Amizero Leadership</span></div>
+      <div class="team-card"><div class="team-avatar">P</div><h4>Programs Manager</h4><span>Field Operations</span></div>
+      <div class="team-card"><div class="team-avatar">F</div><h4>Finance Officer</h4><span>Accountability & Reporting</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ BLOG ══════════════ -->
+<section id="blog">
+  <div class="blog-hero">
+    <div class="section-tag" style="background:rgba(46,125,50,.2);color:#6fcf72;">Our Voice</div>
+    <h1>Amizero <span style="color:var(--orange);">Blog</span></h1>
+    <p>Stories of impact, financial updates, and news from our global partners. Staying transparent and connected with our community.</p>
+  </div>
+
+  <div class="content-section">
+    <div class="blog-tabs">
+      <button class="blog-tab active" onclick="filterBlog('all',this)">All Posts</button>
+      <button class="blog-tab" onclick="filterBlog('main',this)">Main Blog</button>
+      <button class="blog-tab" onclick="filterBlog('financial',this)">Financial Updates</button>
+      <button class="blog-tab" onclick="filterBlog('partner',this)">Partner Countries</button>
+    </div>
+
+    <div class="blog-grid" id="blogGrid">
+      <div class="blog-card" data-cat="main">
+        <div class="blog-img">📰<div class="blog-cat">Main Blog</div></div>
+        <div class="blog-body">
+          <div class="blog-meta">🗓 March 2025 &nbsp;·&nbsp; 5 min read</div>
+          <h3>500 Families Receive Blankets and Essentials This Winter Season</h3>
+          <p>Our largest distribution campaign of the year reached over 500 vulnerable households across 3 districts, providing warmth and hope during the cold months.</p>
+          <div class="blog-read">Read More →</div>
+        </div>
+      </div>
+      <div class="blog-card" data-cat="main">
+        <div class="blog-img">🏫<div class="blog-cat">Main Blog</div></div>
+        <div class="blog-body">
+          <div class="blog-meta">🗓 February 2025 &nbsp;·&nbsp; 4 min read</div>
+          <h3>New Education Program Launches in Rwamagana District</h3>
+          <p>Amizero Association's new literacy and numeracy initiative has enrolled 120 children who had previously dropped out of school due to financial barriers.</p>
+          <div class="blog-read">Read More →</div>
+        </div>
+      </div>
+      <div class="blog-card" data-cat="main">
+        <div class="blog-img">🤝<div class="blog-cat">Main Blog</div></div>
+        <div class="blog-body">
+          <div class="blog-meta">🗓 January 2025 &nbsp;·&nbsp; 3 min read</div>
+          <h3>Community Solidarity Fair Draws 1,000+ Participants</h3>
+          <p>Our annual community fair united local leaders, volunteers, and beneficiaries in a day of celebration, connection, and shared commitment to change.</p>
+          <div class="blog-read">Read More →</div>
+        </div>
+      </div>
+      <div class="blog-card" data-cat="financial">
+        <div class="blog-img">💰<div class="blog-cat" style="background:var(--green);">Financial</div></div>
+        <div class="blog-body">
+          <div class="blog-meta">🗓 Q4 2024 &nbsp;·&nbsp; Annual Report</div>
+          <h3>2024 Annual Financial Report: How Your Donations Were Used</h3>
+          <p>Full breakdown of our 2024 income, expenditure, and program investments — demonstrating our commitment to full transparency with donors and partners.</p>
+          <div class="blog-read">Read Report →</div>
+        </div>
+      </div>
+      <div class="blog-card" data-cat="financial">
+        <div class="blog-img">📊<div class="blog-cat" style="background:var(--green);">Financial</div></div>
+        <div class="blog-body">
+          <div class="blog-meta">🗓 Q3 2024 &nbsp;·&nbsp; Quarterly Update</div>
+          <h3>Q3 2024 Fund Utilization: 89% Directed to Direct Beneficiaries</h3>
+          <p>We are proud to report that 89 cents of every dollar received in Q3 2024 went directly to field programs and beneficiary support.</p>
+          <div class="blog-read">Read Update →</div>
+        </div>
+      </div>
+      <div class="blog-card" data-cat="financial">
+        <div class="blog-img">🌍<div class="blog-cat" style="background:var(--green);">Financial</div></div>
+        <div class="blog-body">
+          <div class="blog-meta">🗓 2024 &nbsp;·&nbsp; Grant Report</div>
+          <h3>International Grant Secured: €50,000 for Food Security Programs</h3>
+          <p>Amizero Association has received a major international grant that will fund 18 months of food security programming for 200 households.</p>
+          <div class="blog-read">Learn More →</div>
+        </div>
+      </div>
+      <div class="blog-card" data-cat="partner">
+        <div class="blog-img">🇧🇪<div class="blog-cat" style="background:#1a4fa0;">Partners</div></div>
+        <div class="blog-body">
+          <div class="blog-meta">🗓 March 2025 &nbsp;·&nbsp; Partnership</div>
+          <h3>Belgium Diaspora Network Joins Amizero as Strategic Partner</h3>
+          <p>The Rwandan diaspora community in Belgium has formalized a partnership agreement, pledging ongoing support and advocacy for our programs.</p>
+          <div class="blog-read">Read More →</div>
+        </div>
+      </div>
+      <div class="blog-card" data-cat="partner">
+        <div class="blog-img">🇺🇸<div class="blog-cat" style="background:#1a4fa0;">Partners</div></div>
+        <div class="blog-body">
+          <div class="blog-meta">🗓 January 2025 &nbsp;·&nbsp; Partnership</div>
+          <h3>New Partnership with USA-Based NGO to Scale Health Programs</h3>
+          <p>A US-based humanitarian organization has committed technical support and co-funding for our community health and nutrition programs.</p>
+          <div class="blog-read">Read More →</div>
+        </div>
+      </div>
+      <div class="blog-card" data-cat="partner">
+        <div class="blog-img">🇬🇧<div class="blog-cat" style="background:#1a4fa0;">Partners</div></div>
+        <div class="blog-body">
+          <div class="blog-meta">🗓 December 2024 &nbsp;·&nbsp; Partnership</div>
+          <h3>UK Partner Visit: Delegation Reviews Field Programs in Kigali</h3>
+          <p>A delegation from our UK partner organization conducted a 5-day field visit, affirming their commitment to continued collaboration and funding.</p>
+          <div class="blog-read">Read More →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ PROGRAM ══════════════ -->
+<section id="program">
+  <div class="program-hero">
+    <div class="section-tag" style="background:rgba(76,175,80,.15);color:#6fcf72;">What We Do</div>
+    <h1>Our <span style="color:var(--orange);">Programs</span></h1>
+    <p>Every program we run is designed with measurable impact in mind — reaching those who need help the most, where they need it most.</p>
+  </div>
+
+  <div class="content-section">
+    <div class="programs-grid">
+      <div class="program-card">
+        <div class="program-img">
+          <p class="upload-hint">Food Security & Nutrition Program</p>
+        </div>
+        <div class="program-body">
+            <img src="feeding program.jfif" alt="feeding program">
+          <div class="program-tag">Food Security</div>
+          <h3>Feeding Families Program</h3>
+          <p>A comprehensive food assistance initiative providing monthly food baskets to chronically food-insecure households, combined with agricultural training to build long-term self-reliance.</p>
+          <div class="program-stats">
+            <div class="p-stat"><strong>320+</strong><span>Families</span></div>
+            <div class="p-stat"><strong>Monthly</strong><span>Frequency</span></div>
+            <div class="p-stat"><strong>5 Districts</strong><span>Coverage</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="program-card">
+        <div class="program-img">
+          <p class="upload-hint">Education & Scholarship Program</p>
+        </div>
+        <div class="program-body">
+            <img src="back school initiatives.jfif" alt="back school">
+          <div class="program-tag">Education</div>
+          <h3>Back to School Initiative</h3>
+          <p>Supporting children from vulnerable families with school fees, uniforms, books, and psychosocial support — ensuring no child's education is cut short by poverty.</p>
+          <div class="program-stats">
+            <div class="p-stat"><strong>200+</strong><span>Children</span></div>
+            <div class="p-stat"><strong>Annual</strong><span>Frequency</span></div>
+            <div class="p-stat"><strong>3 Sectors</strong><span>Coverage</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="program-card">
+        <div class="program-img">
+          <p class="upload-hint">Shelter & Housing Program</p>
+        </div>
+        <div class="program-body">
+            <img src="safe house program.jfif" alt="safe house program">
+          <div class="program-tag">Shelter</div>
+          <h3>Safe Homes Program</h3>
+          <p>Rehabilitating dilapidated homes and constructing new ones for the most vulnerable households — elderly widows, families with disabilities, and child-headed households.</p>
+          <div class="program-stats">
+            <div class="p-stat"><strong>48</strong><span>Homes Built</span></div>
+            <div class="p-stat"><strong>Ongoing</strong><span>Frequency</span></div>
+            <div class="p-stat"><strong>Rwanda</strong><span>Coverage</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="program-card">
+        <div class="program-img">
+          <p class="upload-hint">Vocational Training Program</p>
+        </div>
+        <div class="program-body">
+            <img src="training.jfif" alt="">
+          <div class="program-tag">Livelihoods</div>
+          <h3>Skills for Life Training</h3>
+          <p>Empowering youth and women with marketable vocational skills — tailoring, carpentry, cooking, and digital literacy — to break the cycle of poverty through sustainable income.</p>
+          <div class="program-stats">
+            <div class="p-stat"><strong>150+</strong><span>Graduates</span></div>
+            <div class="p-stat"><strong>Quarterly</strong><span>Frequency</span></div>
+            <div class="p-stat"><strong>Kigali</strong><span>Coverage</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section alt">
+    <div class="section-header">
+      <div class="section-tag">Partnerships</div>
+      <h2 class="section-title">Our <span>Partners</span> & Supporters</h2>
+      <p class="section-sub">We collaborate with international organizations, governments, and diaspora networks to amplify our reach.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;">
+      <div style="background:var(--white);border-radius:12px;border:1px dashed var(--border);padding:32px 20px;text-align:center;color:var(--gray);font-size:.85rem;">🇧🇪 Belgium Partner</div>
+      <div style="background:var(--white);border-radius:12px;border:1px dashed var(--border);padding:32px 20px;text-align:center;color:var(--gray);font-size:.85rem;">🇺🇸 USA Partner</div>
+      <div style="background:var(--white);border-radius:12px;border:1px dashed var(--border);padding:32px 20px;text-align:center;color:var(--gray);font-size:.85rem;">🇬🇧 UK Partner</div>
+      <div style="background:var(--white);border-radius:12px;border:1px dashed var(--border);padding:32px 20px;text-align:center;color:var(--gray);font-size:.85rem;">🇷🇼 Gov. Rwanda</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ CONTACT ══════════════ -->
+<section id="contact">
+  <div class="contact-hero">
+    <div class="section-tag" style="background:rgba(232,76,14,.15);color:var(--orange-light);">Reach Out</div>
+    <h1>Contact <span style="color:var(--orange);">Us</span></h1>
+    <p>We'd love to hear from you — whether you want to donate, volunteer, partner, or simply learn more about our work.</p>
+  </div>
+
+  <div class="content-section">
+    <div class="contact-wrap">
+      <div class="contact-info">
+        <h2>Let's <span style="color:var(--orange);">Connect</span></h2>
+        <p>Reach us through any of the channels below. Our team responds within 24 hours on business days.</p>
+        <div class="contact-item">
+          <div class="contact-icon">📧</div>
+          <div class="contact-item-text">
+            <span>Email Address</span>
+            <p><a href="mailto:amizeroassociation@gmail.com">amizeroassociation@gmail.com</a></p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div class="contact-item-text">
+            <span>Phone / WhatsApp</span>
+            <p><a href="tel:+250728840903">+250 728 840 903</a></p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div class="contact-item-text">
+            <span>Location</span>
+            <p>Kigali, Rwanda</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📱</div>
+          <div class="contact-item-text">
+            <span>Follow Us on Instagram</span>
+            <p><a href="https://www.instagram.com/au__drick__" target="_blank">— Amizero Association IT MANAGER</a></p>
+          </div>
+        </div>
+        <div class="socials-row" style="margin-top:24px;">
+          <a href="https://www.instagram.com/au__drick__" target="_blank" class="social-btn social-instagram">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            Click to Instagram — Amizero Association IT MANAGER
+          </a>
+        </div>
+        <div class="socials-row" style="margin-top:12px;">
+          <a href="https://wa.me/250728840903" target="_blank" class="social-btn social-whatsapp">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp — 0728840903
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-form-wrap">
+        <h3>Send Us a <span style="color:var(--orange);">Message</span></h3>
+        <div id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name *</label>
+              <input type="text" id="firstName" placeholder="Your first name" />
+            </div>
+            <div class="form-group">
+              <label>Last Name *</label>
+              <input type="text" id="lastName" placeholder="Your last name" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email Address *</label>
+            <input type="email" id="emailField" placeholder="your@email.com" />
+          </div>
+          <div class="form-group">
+            <label>Subject</label>
+            <select id="subjectField">
+              <option>General Inquiry</option>
+              <option>Donation / Funding</option>
+              <option>Volunteer Interest</option>
+              <option>Partnership Proposal</option>
+              <option>Media / Press</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message *</label>
+            <textarea id="messageField" placeholder="Write your message here..."></textarea>
+          </div>
+          <button class="submit-btn" onclick="submitForm()">✉️ Send Message</button>
+          <div class="form-success" id="formSuccess">
+            ✅ Thank you! Your message has been sent. We will respond within 24 hours.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <h3><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:22px;height:22px;vertical-align:middle;margin-right:8px;display:inline-block">
+  <path d="M6 4C5 5 4 6 3.5 7.5C3 9 3 10.5 3.8 12C4.2 13 3.8 14.5 4.5 16C5.2 17.5 5 19 6 20.5C7 22 9 23 11.5 23.5C13 23.8 14.5 24 16 23.5C17.5 23 19 22 20 20.5C21 19 21.5 17.5 21.5 16C22 14.5 22.3 13 22 11.5C21.7 10 21 8.5 20 7C19 5.5 17.5 4.5 16 4C14.5 3.5 13 3 11.5 3C9.5 3 8 3.2 7 3.7C6.5 3.8 6.3 3.8 6 4Z" fill="#E84C0E" stroke="#c0390a" stroke-width="0.4"/>
+  <circle cx="9.5" cy="10" r="1.3" fill="#FFDCC8"/>
+  <line x1="9.5" y1="11.3" x2="9.5" y2="15" stroke="#FFDCC8" stroke-width="1" stroke-linecap="round"/>
+  <path d="M8 13 C8.5 12.5 9.5 12.2 9.5 12.2 C9.5 12.2 10.5 12.5 11 13" stroke="#FFDCC8" stroke-width="0.8" stroke-linecap="round" fill="none"/>
+  <line x1="9.5" y1="15" x2="8.5" y2="17.5" stroke="#FFDCC8" stroke-width="0.8" stroke-linecap="round"/>
+  <line x1="9.5" y1="15" x2="10.5" y2="17.5" stroke="#FFDCC8" stroke-width="0.8" stroke-linecap="round"/>
+  <circle cx="14.5" cy="10" r="1.3" fill="#FFDCC8"/>
+  <line x1="14.5" y1="11.3" x2="14.5" y2="15" stroke="#FFDCC8" stroke-width="1" stroke-linecap="round"/>
+  <path d="M13 13 C13.5 12.5 14.5 12.2 14.5 12.2 C14.5 12.2 15.5 12.5 16 13" stroke="#FFDCC8" stroke-width="0.8" stroke-linecap="round" fill="none"/>
+  <line x1="14.5" y1="15" x2="13.5" y2="17.5" stroke="#FFDCC8" stroke-width="0.8" stroke-linecap="round"/>
+  <line x1="14.5" y1="15" x2="15.5" y2="17.5" stroke="#FFDCC8" stroke-width="0.8" stroke-linecap="round"/>
+  <path d="M12 12.5 C12 12 12.3 11.8 12.5 11.8 C12.7 11.8 13 12 13 12.5 C13 13 12 13.8 12 13.8 C12 13.8 11 13 11 12.5 C11 12 11.3 11.8 11.5 11.8 C11.7 11.8 12 12 12 12.5 Z" fill="#FFD700"/>
+</svg> Amizero Association</h3>
+      <p>Committed to helping vulnerable families by providing essential support and promoting community solidarity across Rwanda and beyond.</p>
+      <div class="footer-social" style="margin-top:20px;">
+        <a class="f-soc" href="https://www.instagram.com/au__drick__" target="_blank" title="Instagram">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a class="f-soc" href="https://wa.me/250728840903" target="_blank" title="WhatsApp">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+        <a class="f-soc" href="mailto:amizeroassociation@gmail.com" title="Email">📧</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <a onclick="showSection('home')">Home</a>
+      <a onclick="showSection('about')">About Us</a>
+      <a onclick="showSection('blog')">Blog</a>
+      <a onclick="showSection('program')">Programs</a>
+      <a onclick="showSection('contact')">Contact Us</a>
+    </div>
+    <div class="footer-col">
+      <h4>Our Programs</h4>
+      <a onclick="showSection('program')">Feeding Families</a>
+      <a onclick="showSection('program')">Back to School</a>
+      <a onclick="showSection('program')">Safe Homes</a>
+      <a onclick="showSection('program')">Skills Training</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="mailto:amizeroassociation@gmail.com">amizeroassociation@gmail.com</a>
+      <a href="tel:+250728840903">0728 840 903</a>
+      <a href="https://www.instagram.com/au__drick__" target="_blank">Instagram: amizero IT MANAGER</a>
+      <a href="https://wa.me/250728840903" target="_blank">WhatsApp: 0728840903</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Amizero Association. All rights reserved. | Kigali, Rwanda</p>
+    <p style="font-size:.78rem;color:rgba(255,255,255,.35);">Hope · Dignity · Community</p>
+  </div>
+</footer>
+
+<script>
+  function showSection(id) {
+    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    const navEl = document.getElementById('nav-' + id);
+    if (navEl) navEl.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById('navLinks').classList.remove('open');
+  }
+
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  function filterBlog(cat, btn) {
+    document.querySelectorAll('.blog-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.blog-card').forEach(c => {
+      c.style.display = (cat === 'all' || c.dataset.cat === cat) ? '' : 'none';
+    });
+  }
+
+  function submitForm() {
+    const fn = document.getElementById('firstName').value.trim();
+    const ln = document.getElementById('lastName').value.trim();
+    const em = document.getElementById('emailField').value.trim();
+    const msg = document.getElementById('messageField').value.trim();
+    if (!fn || !ln || !em || !msg) { alert('Please fill in all required fields (marked with *).'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { alert('Please enter a valid email address.'); return; }
+    const btn = document.querySelector('.submit-btn');
+    btn.textContent = '⏳ Sending...';
+    btn.disabled = true;
+    setTimeout(() => {
+      document.getElementById('contactForm').style.opacity = '.4';
+      document.getElementById('formSuccess').style.display = 'block';
+      btn.style.display = 'none';
+    }, 1400);
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.mission-card, .blog-card, .program-card, .team-card, .contact-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'opacity .6s ease, transform .6s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
